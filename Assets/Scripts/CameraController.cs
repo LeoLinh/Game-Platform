@@ -47,6 +47,10 @@ public class CameraController : MonoBehaviour
                 Mathf.Clamp(transform.position.y, clampMin.position.y + halfHeight, clampMax.position.y - halfHeight),
                 transform.position.z);
         }
+        if(ParalaxBackground.instance != null)
+        {
+            ParalaxBackground.instance.moveBackGround();
+        }        
     }
 
     private void OnDrawGizmos()
