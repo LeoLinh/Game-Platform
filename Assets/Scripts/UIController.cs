@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Xml.Schema;
 
 public class UIController : MonoBehaviour
 {
@@ -14,6 +17,10 @@ public class UIController : MonoBehaviour
     public Image[] heartIcons;
 
     public Sprite heartFull, heartEmpty;
+
+    public TMP_Text livesText;
+
+    public GameObject gameOverScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -52,5 +59,22 @@ public class UIController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void UpdateLivesDisplay(int currentLives)
+    {
+        livesText.text = currentLives.ToString();
+    }
+
+    public void ShowGameOver()
+    {
+        gameOverScreen.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        //Debug.Log("Restarting");
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

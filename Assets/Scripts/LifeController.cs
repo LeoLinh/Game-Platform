@@ -14,10 +14,17 @@ public class LifeController : MonoBehaviour
 
     public float respawnDelay = 2f;
 
+    public int currentLives = 3;
+
     // Start is called before the first frame update
     void Start()
     {
         thePlayer = FindFirstObjectByType<PlayerController>();
+
+        if (UIController.instance != null)
+        {
+            UIController.instance.UpdateLivesDisplay(currentLives);
+        }
     }
 
     // Update is called once per frame
@@ -33,8 +40,24 @@ public class LifeController : MonoBehaviour
        //PlayerHealthController.Instance.AddHealth(PlayerHealthController.Instance.maxhealth);
 
         thePlayer.gameObject.SetActive(false);
+        thePlayer.theRB.velocity = Vector2.zero;
 
-        StartCoroutine(RespawnCo());
+        currentLives--;
+
+        if (currentLives > 0)
+        {
+            StartCoroutine(RespawnCo());
+        }
+        else
+        {
+            currentLives = 0;
+
+            StartCoroutine(GameOverCo());
+        }
+        if (UIController.instance != null)
+        {
+            UIController.instance.UpdateLivesDisplay(currentLives);
+        }           
     }
 
     public IEnumerator RespawnCo()
@@ -46,5 +69,15 @@ public class LifeController : MonoBehaviour
         PlayerHealthController.Instance.AddHealth(PlayerHealthController.Instance.maxhealth);
 
         thePlayer.gameObject.SetActive(true);
+    }
+
+    public IEnumerator GameOverCo()
+    {
+        yield return new WaitForSeconds(respawnDelay);
+
+        if (UIController.instance != null)
+        {
+            UIController.instance.ShowGameOver();
+        }
     }
 }
