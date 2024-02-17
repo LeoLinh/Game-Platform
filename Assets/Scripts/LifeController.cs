@@ -16,6 +16,8 @@ public class LifeController : MonoBehaviour
 
     public int currentLives = 3;
 
+    public GameObject deathEffect, respawnEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +59,9 @@ public class LifeController : MonoBehaviour
         if (UIController.instance != null)
         {
             UIController.instance.UpdateLivesDisplay(currentLives);
-        }           
+        }
+
+        Instantiate(deathEffect, thePlayer.transform.position, deathEffect.transform.rotation);
     }
 
     public IEnumerator RespawnCo()
@@ -69,6 +73,8 @@ public class LifeController : MonoBehaviour
         PlayerHealthController.Instance.AddHealth(PlayerHealthController.Instance.maxhealth);
 
         thePlayer.gameObject.SetActive(true);
+
+        Instantiate(respawnEffect, thePlayer.transform.position, Quaternion.identity);
     }
 
     public IEnumerator GameOverCo()
