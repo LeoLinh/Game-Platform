@@ -40,5 +40,10 @@ public class CollectibleManager : MonoBehaviour
                 LifeController.instance.AddLife();
             }
         }
+
+        if(UIController.instance != null)
+        {
+            UIController.instance.UpdateCollectibles(collectibleCount);
+        }
     }
 }

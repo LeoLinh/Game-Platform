@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isGround", isGrounded);
         anim.SetFloat("ySpeed", theRB.velocity.y);
     }
-    void Jump()
+    public void Jump()
     {
         theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
     }
