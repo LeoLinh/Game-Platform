@@ -30,6 +30,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource menuMusic, bossMusic, levelCompleteMusic;
     public AudioSource[] levelTracks;
 
+    public AudioSource[] allSFX;
+
     void StopMusic()
     {
         menuMusic.Stop();
@@ -62,5 +64,20 @@ public class AudioManager : MonoBehaviour
     {
         StopMusic();
         levelTracks[TrackToPlay].Play();
+    }
+
+    public void PLaySFX(int SFXToPlay)
+    {
+        allSFX[SFXToPlay].Stop();
+        allSFX[SFXToPlay].Play();
+    }
+
+    public void PlaySFXpitched(int sfxToPlay)
+    {
+        allSFX[sfxToPlay].Stop();
+
+        allSFX[sfxToPlay].pitch = Random.Range(.75f, 1.25f);
+
+        allSFX[sfxToPlay].Play();
     }
 }

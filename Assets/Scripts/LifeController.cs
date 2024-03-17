@@ -23,6 +23,8 @@ public class LifeController : MonoBehaviour
     {
         thePlayer = FindFirstObjectByType<PlayerController>();
 
+        currentLives = InfoTracker.Instance.currentLives;
+
         UpdateDisplay();
     }
 
@@ -61,6 +63,8 @@ public class LifeController : MonoBehaviour
         UpdateDisplay();
 
         Instantiate(deathEffect, thePlayer.transform.position, deathEffect.transform.rotation);
+
+        AudioManager.Instance.PLaySFX(11);
     }
 
     public IEnumerator RespawnCo()
@@ -91,6 +95,8 @@ public class LifeController : MonoBehaviour
         currentLives++;
 
         UpdateDisplay();
+
+        AudioManager.Instance.PLaySFX(8);
     }
 
     public void UpdateDisplay()
